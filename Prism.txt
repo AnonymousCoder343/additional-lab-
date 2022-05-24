@@ -1,0 +1,129 @@
+Problem Statement: 
+Implement Greedy search algorithm for Prim's Minimal Spanning Tree Algorithm.
+ 
+Objective: 
+To understand the basic concepts of Prim’s algorithm techniques. 
+
+Outcome: 
+To implement the basic concept of Prim’s algorithm using Minimal Spanning Tree Algorithm techniques. 
+
+
+Theory Concepts: 
+We will study what is the minimum spanning tree and how to convert a graph into a minimum spanning 
+tree using Prim’s Algorithm. We will learn the algorithm and python code for prim’s algorithm and an 
+example for better understanding. Lastly, we will study the running time complexity and applications of 
+prim's algorithm in real life. 
+
+What is a Minimum Spanning Tree? 
+As we all know, the graph which does not have edges pointing to any direction in a graph is called an 
+undirected graph and the graph always has a path from a vertex to any other vertex. A spanning tree is a 
+subgraph of the undirected connected graph where it includes all the nodes of the graph with the 
+minimum possible number of edges. Remember, the sub graph should contain each and every node of the 
+original graph. If any node is missed out then it is not a spanning tree and also, the spanning tree doesn’t 
+contain cycles. If the graph has n number of nodes, then the total number of spanning trees created from a 
+complete graph is equal to n^(n-2). In a spanning tree, the edges may or may not have weights associated 
+with them. Therefore, the spanning tree in which the sum of edges is minimum as possible then that 
+spanning tree is called the minimum spanning tree. One graph can have multiple spanning-tree but it can 
+have only one unique minimum spanning tree. There are two different ways to find out the minimum 
+spanning tree from the complete graph i.e Kruskal's algorithm and Prim’s algorithm. Let us study prim’s 
+algorithm in detail below: 
+
+What is Prim’s Algorithm? 
+Prim’s algorithm is a minimum spanning tree algorithm which helps to find out the edges of the graph to 
+form the tree including every node with the minimum sum of weights to form the minimum spanning tree. 
+Prim’s algorithm starts with the single source node and later explores all the adjacent nodes of the source 
+node with all the connecting edges. While we are exploring the graphs, we will choose the edges with the 
+minimum weight and those which cannot cause the cycles in the graph.
+Prim's Algorithm for Minimum Spanning Tree 
+Prim's algorithm basically follows the greedy algorithm approach to find the optimal solution. To find the 
+minimum spanning tree using prim's algorithm, we will choose a source node and keep adding the edges 
+with the lowest weight.
+ 
+The algorithm is as given below: 
+ Initialize the algorithm by choosing the source vertex 
+ Find the minimum weight edge connected to the source node and another node and add it to the 
+tree 
+ Keep repeating this process until we find the minimum spanning tree.
+ 
+Pseudo code:
+T = ∅; 
+M = { 1 }; 
+while (M ≠ N) 
+let (m, n) be the lowest cost edge such that m ∈ M and n ∈ N - M; 
+T = T ∪ {(m, n)} 
+M = M ∪ {n} 
+Here we create two sets of nodes i.e, M and M-N. M set contains the list of nodes that have been visited 
+and the M-N set contains the nodes that haven’t been visited. Later, we will move each node from M to 
+M-N after each step by connecting the least weight edge. 
+
+Time Complexity: 
+The running time for prim’s algorithm is O(VlogV + ElogV) which is equal to O(ElogV) because every 
+insertion of a node in the solution takes logarithmic time. Here, E is the number of edges and V is the 
+number of vertices/nodes. However, we can improve the running time complexity to O(E + logV) of 
+prim’s algorithm using Fibonacci Heaps. 
+
+Applications:
+ Prim’s algorithm is used in network design 
+ It is used in network cycles and rail tracks connecting all the cities 
+ Prim’s algorithm is used in laying cables of electrical wiring 
+ Prim’s algorithm is used in irrigation channels and placing microwave towers 
+ It is used in cluster analysis 
+ Prim’s algorithm is used in gaming development and cognitive science 
+ Path finding algorithms in artificial intelligence and traveling salesman problems make use of 
+prim’s algorithm. 
+
+Output: 
+(Execute the program and attach the printout here) 
+
+Conclusion: 
+As we studied, the minimum spanning tree has its own importance in the real world, it is important 
+to learn the prim’s algorithm which leads us to find the solution to many problems. When it comes to 
+finding the minimum spanning tree for the dense graphs, prim’s algorithm is the first choice. 
+
+
+
+
+
+
+
+
+
+INF = 9999999
+# number of vertices in graph
+N = 5
+# creating graph by adjacency matrix method
+G = [[0, 25, 5, 0, 0],
+     [20, 0, 5, 8, 2],
+     [5, 15, 0, 1, 3],
+     [0, 6, 1, 0, 1],
+     [0, 2, 4, 12, 0]]
+
+selected_node = [0, 0, 0, 0, 0]
+no_edge = 0
+selected_node[0] = True
+# printing for edge and weight
+print("Edge : Weight\n")
+while (no_edge < N - 1):
+
+    minimum = INF
+    a = 0
+    b = 0
+    for m in range(N):
+        if selected_node[m]:
+            for n in range(N):
+                if ((not selected_node[n]) and G[m][n]):
+                    # not in selected and there is an edge
+                    if minimum > G[m][n]:
+                        minimum = G[m][n]
+                        a = m
+                        b = n
+    print(str(a) + "-" + str(b) + ":" + str(G[a][b]))
+    selected_node[b] = True
+    no_edge += 1
+
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+Aim: Assignment to install and configure Google App Engine.
+
+Theory:
+Google App Engine is a web application hosting service. By “web application,” we mean
+an application or service accessed over the Web, usually with a web browser: storefronts with
+shopping carts, social networking sites, multiplayer games, mobile applications, survey
+applications, project management, collaboration, publishing, and all the other things we’re
+discovering are good uses for the Web.
+
+Google App Engine:
+It is a platform-as-a-service (PaaS) Cloud computing platform that is fully managed and
+uses inbuilt services to run your apps. You can start development almost instantly after
+downloading the software development kit (SDK). You can go on to the developer’s guide right
+away when you click on the language you wish to develop your app in.
+
+Advantages of Google App Engine:
+• Infrastructure for Security
+• Scalability
+• Performance and Reliability
+• Cost Savings
+• Platform Independence
+
+
+o Installation Process
+o
+o Make sure that Python is installed in your system.
+o Search “Google Cloud” on your
+browser andopen the link asshown
+in fig.
+o Select “Cloud SDK” tab.
+o Click on gcloud CLI to install
+Google SDK CLI
+• Click on Finish to start the Google Cloud SDK 
+Shell or open the application “Google Cloud 
+SDK Shell” and type “gcloud in it” command 
+to begin the process.
+• Choose 2
+nd option for “Creating a new
+configuration” or1st
+option for choose the “default settings” from fig.shown below.
+• Now choose account to login. If not logged in 
+earlier you’ll be redirected to your browser for 
+login with your google account. Enter the
+credentials.
+• Click on “Console” and open cloud shell editor.
+• Create New file ‘name.py
+• Type the code. Click on ‘Run’ menu tab.
+• Click on “Start without debugging” if you want to run without debugging
+• the program. Proceed with default configurations .
+• You have successfully deployed python app.
+
+Conclusion: Thus we have studied Google app Engine.

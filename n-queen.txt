@@ -1,0 +1,181 @@
+
+
+Problem Statement: 
+Implement a solution for a Constraint Satisfaction Problem using Branch and Bound and Backtracking for 
+n-queens problem or a graph coloring problem. 
+
+Objective: 
+To understand the basic concepts of a Constraint Satisfaction Problem for n-queens problem. 
+
+Outcome: 
+To implement a solution for a Constraint Satisfaction Problem for n-queens problem. 
+
+Theory Concepts: 
+8 Queens Problem using Branch and Bound 
+The N-Queens problem is a puzzle of placing exactly N queens on an NxN chessboard, such that no two 
+queens can attack each other in that configuration. Thus, no two queens can lie in the same row, column 
+or diagonal. 
+The branch and bound solution is somehow different, it generates a partial solution until it figures that 
+there's no point going deeper as we would ultimately lead to a dead end. 
+In the backtracking approach, we maintain an 8x8 binary matrix for keeping track of safe cells (by 
+eliminating the unsafe cells, those that are likely to be attacked) and update it each time we place a new 
+queen. However, it required O(n^2) time to check safe cell and update the queen. 
+
+In the 8 queens problem, we ensure the following. 
+no two queens share a row 
+no two queens share a column 
+no two queens share the same left diagnol 
+no two queens share the same right diagnol 
+we already ensure that the queens do not share the same column by the way we fill out our auxiliary 
+matrix (column by column). Hence, only the left out 3 conditions are left out to be satisfied. 
+
+Applying the branch and bound approach : 
+The branch and bound approach suggets that we create a partial solution and use it to ascertain whether 
+we need to continue in a particular direction or not. For this problem, we create 3 arrays to check for 
+conditions 1,3 and 4. The boolean arrays tell which rows and diagnols are already occupied. To achieve 
+this, we need a numbering system to specify which queen is placed.The indexes on these arrays would 
+help us know which queen we are analysing. 
+
+Preprocessing - 
+create two NxN matrices, one for top-left to bottom- right diagnol, and other for top-right 
+to bottom-left diagnol. We need to fill these in such a way that two queens sharing same top- left_bottomright diagnol will have same value in slashDiagonal and two queens sharing same top-right bottom-left 
+diagnol will have same value in backslash Diagnol. 
+slashDiagnol(row)(col) = row + col 
+backSlashDiagnol(row)(col) = row - col + (N1) { N = 8 } 
+{ we added (N-1) as we do not need negative values in backSlashDiagnol } 
+
+For placing a queen i on row j, check the following : 
+1. whether row 'j' is used or not 
+2. whether slashDiagnol 'i+j' is used or not 
+3. whether backSlashDiagnol 'i-j+7' is used or not 
+If the answer to any one of the following is true, we try another location for queen i on row j, mark the 
+row and diagnols; and recur for queen i+1. 
+
+Output: 
+(Execute the program and attach the printout here) 
+
+Conclusion: 
+ Hence we have implemented Constraint Satisfaction Problem using Branch and Bound and 
+Backtracking for n-queens problem.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class QueenChessBoard:
+    def __init__(self, size):
+        # board has dimensions size x size
+        self.size = size
+        # columns[r] is a number c if a queen is placed at row r and column c.
+        # columns[r] is out of range if no queen is place in row r.
+        # Thus after all queens are placed, they will be at positions
+        # (columns[0], 0), (columns[1], 1), ... (columns[size - 1], size - 1)
+        self.columns = []
+
+    def place_in_next_row(self, column):
+        self.columns.append(column)
+
+    def remove_in_current_row(self):
+        return self.columns.pop()
+
+    def is_this_column_safe_in_next_row(self, column):
+        # index of next row
+        row = len(self.columns)
+
+        # check column
+        for queen_column in self.columns:
+            if column == queen_column:
+                return False
+
+        # check diagonal
+        for queen_row, queen_column in enumerate(self.columns):
+            if queen_column - queen_row == column - row:
+                return False
+
+        # check other diagonal
+        for queen_row, queen_column in enumerate(self.columns):
+            if ((self.size - queen_column) - queen_row
+                    == (self.size - column) - row):
+                return False
+
+        return True
+
+    def display(self):
+        for row in range(self.size):
+            for column in range(self.size):
+                if column == self.columns[row]:
+                    print('Q', end=' ')
+                else:
+                    print('.', end=' ')
+            print()
+
+
+def solve_queen(size):
+    """Display a chessboard for each possible configuration of placing n queens
+    on an n x n chessboard and print the number of such configurations."""
+    board = QueenChessBoard(size)
+    number_of_solutions = 0
+
+    row = 0
+    column = 0
+    # iterate over rows of board
+    while True:
+        # place queen in next row
+        while column < size:
+            if board.is_this_column_safe_in_next_row(column):
+                board.place_in_next_row(column)
+                row += 1
+                column = 0
+                break
+            else:
+                column += 1
+
+        # if could not find column to place in or if board is full
+        if (column == size or row == size):
+            # if board is full, we have a solution
+            if row == size:
+                board.display()
+                print()
+                number_of_solutions += 1
+
+                # small optimization:
+                # In a board that already has queens placed in all rows except
+                # the last, we know there can only be at most one position in
+                # the last row where a queen can be placed. In this case, there
+                # is a valid position in the last row. Thus we can backtrack two
+                # times to reach the second last row.
+                board.remove_in_current_row()
+                row -= 1
+
+            # now backtrack
+            try:
+                prev_column = board.remove_in_current_row()
+            except IndexError:
+                # all queens removed
+                # thus no more possible configurations
+                break
+            # try previous row again
+            row -= 1
+            # start checking at column = (1 + value of column in previous row)
+            column = 1 + prev_column
+
+    print('Number of solutions:', number_of_solutions)
+
+
+n = int(input('Enter n: '))
+solve_queen(n)

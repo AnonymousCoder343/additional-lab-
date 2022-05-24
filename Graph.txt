@@ -1,0 +1,101 @@
+Problem Statement: 
+Implement Graph coloring problem’s solution using backtracking algorithm 
+
+Objective: 
+To understand the basic concepts of Graph coloring. 
+
+Outcome: 
+To implement the basic concept Graph coloring problem’s solution using backtracking algorithm. 
+
+Theory Concepts: 
+The graph coloring problem is to discover whether the nodes of the graph G can be covered 
+in such a way, that no two adjacent nodes have the same color yet only m colors are used. 
+This graph coloring problem is also known as M- color ability decision problem. 
+The M – colorability optimization problem deals with the smallest integer m for which the 
+graph G can be colored. The integer is known as a chromatic number of the graph. 
+Here, it can also be noticed that if d is the degree of the given graph, then it can be 
+colored with d+ 1 color. 
+
+A graph is also known to be planar if and only if it can be drawn in a planar in such a way 
+that no two edges cross each other. A special case is the 4 - colors problem for planar 
+graphs. The problem is to color the region in a map in such a way that no two adjacent 
+regions have the same color. Yet only four colors are needed. This is a problem for which 
+graphs are very useful because a map can be easily transformed into a graph. Each region of 
+the map becomes the node, and if two regions are adjacent, they are joined by an edge. 
+Graph coloring problem can also be solved using a state space tree, whereby applying a 
+backtracking method required results are obtained. 
+
+For solving the graph coloring problem, we suppose that the graph is represented by its 
+adjacency matrix G[ 1:n, 1:n], where, G[ i, j]= 1 if (i, j) is an edge of G, and G[i, j] = 0 
+otherwise. 
+
+The colors are represented by the integers 1, 2, ..., m and the solutions are given by the ntuple (x1, x2, x3, ..., xn), where x1 is the color of node i. 
+
+Output: 
+(Execute the program and attach the printout here) 
+
+Conclusion: 
+ Hence we have implemented Graph coloring problem’s solution using backtracking algorithm. 
+
+
+
+
+
+# Adjacent Matrix
+G = [[ 0, 1, 1, 0, 1, 0],
+     [ 1, 0, 1, 1, 0, 1],
+     [ 1, 1, 0, 1, 1, 0],
+     [ 0, 1, 1, 0, 0, 1],
+     [ 1, 0, 1, 0, 0, 1],
+     [ 0, 1, 0, 1, 1, 0]]
+
+
+
+# inisiate the name of node.
+node = "abcdef"
+t_={}
+for i in range(len(G)):
+  t_[node[i]] = i
+
+# count degree of all node.
+degree =[]
+for i in range(len(G)):
+  degree.append(sum(G[i]))
+
+# inisiate the posible color
+colorDict = {}
+for i in range(len(G)):
+  colorDict[node[i]]=["Blue","Red","Yellow","Green"]
+
+
+# sort the node depends on the degree
+sortedNode=[]
+indeks = []
+
+# use selection sort
+for i in range(len(degree)):
+  _max = 0
+  j = 0
+  for j in range(len(degree)):
+    if j not in indeks:
+      if degree[j] > _max:
+        _max = degree[j]
+        idx = j
+  indeks.append(idx)
+  sortedNode.append(node[idx])
+
+# The main process
+theSolution={}
+for n in sortedNode:
+  setTheColor = colorDict[n]
+  theSolution[n] = setTheColor[0]
+  adjacentNode = G[t_[n]]
+  for j in range(len(adjacentNode)):
+    if adjacentNode[j]==1 and (setTheColor[0] in colorDict[node[j]]):
+      colorDict[node[j]].remove(setTheColor[0])
+
+
+# Print the solution
+for t,w in sorted(theSolution.items()):
+  print("Node",t," = ",w)
+

@@ -1,0 +1,36 @@
+Aim-: Assignment Design and develop custom Application (Mini Project) using Sales force Cloud.
+ 
+ Theory-: The lightning app builder is a point and click tool to create a single page application for 
+Salesforce1 and lightning Experience. 
+Simply drag and drop the components into the builder layout to build the application. We can build 
+single-page applications using Visualforce pages and global actions to make the app more interactive.
+App builder also provides the capability to build dashboard style applications. It builds responsive 
+applications for any type of device it will work similarly. 
+We can create a layout which four choices of sections for an app page. Here is an example of three 
+sections layout. Section 1 is the Main Column and the other sections are sidebars.
+
+ Implementation steps:- 
+1. From the Home tab in Setup, enter App in the Quick Find box, then select App Manager.
+2. Click New Lightning App.
+3. Walk through the Lightning App Wizard, creating an app with these parameters. App Name. ...
+4. Click Save and Finish to exit the wizard.
+5. From the App Launcher 
+6. Check out the new app!
+
+• Click on setup
+• Search app manager
+• Select New Lightning App
+• Insert app name 
+• Upload app logo image and click
+• Click in next
+• Click on next
+• Select navigation items. This will appear at the top of the app
+• Click on next
+• Select system administrator 
+• click on save&finish
+• Click on view all 
+• Select your app name
+• This is your app 
+
+ Conclusion-: 
+ We learn about Design and develop custom Application using Sales force Clou
